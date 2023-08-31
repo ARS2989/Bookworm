@@ -20,3 +20,11 @@
     "nodemon": "^2.0.3"
   }
 }
+{
+  // ...etc.
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  }
+  // other dependencies
+}

@@ -16,3 +16,13 @@
     "concurrently": "^5.1.0"
   }
 }
+
+
+{
+  // ...etc.
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  }
+  // other dependencies
+}

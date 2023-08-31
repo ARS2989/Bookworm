@@ -2,6 +2,16 @@
 MERN Book Search Engine
 
 
+## Description:
+
+Transform a fully operational Google Books API search engine, initially constructed with a RESTful API structure, into a GraphQL API powered by Apollo Server. The original application was developed utilizing the MERN stack, encompassing a React frontend, MongoDB database, and Node.js/Express.js server and API. It was primed to permit users to persistently store book search results in the backend.
+
+This task encompasses:
+
+Configuring an Apollo Server to leverage GraphQL queries and mutations for data retrieval and manipulation, thereby supplanting the pre-existing RESTful API.
+Adapting the existing authentication middleware to seamlessly integrate with the context of a GraphQL API.
+Crafting an Apollo Provider to establish communication between requests and the Apollo Server.
+Deploying the application to Heroku, utilizing a MongoDB database hosted on MongoDB Atlas.
 
 
 ## User Story

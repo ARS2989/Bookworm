@@ -109,3 +109,45 @@ const SavedBooks = () => {
 };
 
 export default SavedBooks;
+
+
+
+
+import React from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ME } from '../queries'; // Import the GET_ME query
+import { REMOVE_BOOK } from '../mutations'; // Import the REMOVE_BOOK mutation
+
+function SavedBooks() {
+  const { loading, error, data } = useQuery(GET_ME); // Use the useQuery() hook
+  const [removeBook] = useMutation(REMOVE_BOOK); // Use the useMutation() hook
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const userData = data.me; // Save the user data from the query
+
+  const handleDeleteBook = async (bookId) => {
+    try {
+      // Execute the mutation to remove the book by bookId
+      await removeBook({
+        variables: { bookId }
+      });
+
+      // Update the userData by filtering out the removed book
+      userData.savedBooks = userData.savedBooks.filter(book => book.bookId !== bookId);
+    } catch (error) {
+      console.error('Error deleting book:', error);
+    }
+  };
+
+  // Rest of the component logic...
+
+  return (
+    <div>
+      {/* Render saved books */}
+    </div>
+  );
+}
+
+export default SavedBooks;

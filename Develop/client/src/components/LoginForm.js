@@ -90,3 +90,39 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../mutations'; // Import the LOGIN_USER mutation
+
+function LoginForm() {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+
+  // Initialize useMutation hook
+  const [loginUser] = useMutation(LOGIN_USER);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Execute the mutation and get the response data
+      const { data } = await loginUser({
+        variables: { ...formState } // Pass the formState object as variables
+      });
+      const token = data.login.token;
+      // Handle token (e.g., store in local storage or context)
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+
+  // Rest of the component logic...
+
+  return (
+    <div>
+      {/* Render login form */}
+    </div>
+  );
+}
+
+export default LoginForm;

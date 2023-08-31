@@ -152,3 +152,39 @@ const SearchBooks = () => {
 };
 
 export default SearchBooks;
+
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { SAVE_BOOK } from '../mutations'; // Import the SAVE_BOOK mutation
+
+function SearchBooks() {
+  const [savedBookIds, setSavedBookIds] = useState([]);
+
+  // Initialize useMutation hook
+  const [saveBook] = useMutation(SAVE_BOOK);
+
+  const handleSaveBook = async (book) => {
+    try {
+      // Execute the mutation and get the response data
+      const { data } = await saveBook({
+        variables: { ...book } // Pass the book object as variables
+      });
+      
+      // Update the savedBookIds state with the newly saved book's ID
+      setSavedBookIds([...savedBookIds, data.saveBook._id]);
+    } catch (error) {
+      console.error('Error saving book:', error);
+    }
+  };
+
+  // Rest of the component logic...
+
+  return (
+    <div>
+      {/* Render book search results */}
+    </div>
+  );
+}
+
+export default SearchBooks;

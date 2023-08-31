@@ -108,3 +108,41 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
+
+
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../mutations'; // Import the ADD_USER mutation
+
+function SignupForm() {
+  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+
+  // Initialize useMutation hook
+  const [addUser] = useMutation(ADD_USER);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Execute the mutation and get the response data
+      const { data } = await addUser({
+        variables: { ...formState } // Pass the formState object as variables
+      });
+      const token = data.addUser.token;
+      // Handle token (e.g., store in local storage or context)
+    } catch (error) {
+      console.error('Signup error:', error);
+    }
+  };
+
+  // Rest of the component logic...
+
+  return (
+    <div>
+      {/* Render signup form */}
+    </div>
+  );
+}
+
+export default SignupForm;
